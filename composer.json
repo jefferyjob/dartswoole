@@ -1,0 +1,22 @@
+{
+    "name": "jefferyjob/dartswoole",
+    "description": "Darts Framework Libary",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "libin",
+            "email": "libinjob@163.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dartswoole\\": "src"
+        },
+        "files": [
+            "src/Help/Debug.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
