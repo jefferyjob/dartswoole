@@ -17,6 +17,19 @@
             "src/Help/Debug.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dartswoole\\Test\\": "tests"
+        }
+    },
     "minimum-stability": "dev",
-    "require": {}
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.x-dev"
+    }
 }

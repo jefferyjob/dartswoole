@@ -1,5 +1,5 @@
 <?php
-namespace Src\Help;
+namespace Dartswoole\Help;
 
 class Debug {
 
@@ -25,14 +25,15 @@ class Debug {
      *
      * @param $string
      */
-    private static function info($string) {
-        echo ColorString::getColoredString($string, 'black', 'green');
+    public static function info($string) {
+        echo PHP_EOL.ColorString::getColoredString($string, 'green').PHP_EOL;
     }
-    private static function warn($string) {
-        echo ColorString::getColoredString($string, 'black', 'yellow');
+    public static function warn($string) {
+        echo PHP_EOL.ColorString::getColoredString($string, 'black', 'yellow').PHP_EOL;
     }
-    private static function error($string) {
-        echo ColorString::getColoredString($string, 'white', 'red');
+    public static function error($string) {
+        echo PHP_EOL.ColorString::getColoredString($string, 'white', 'red').PHP_EOL;
+        die;
     }
 
 }

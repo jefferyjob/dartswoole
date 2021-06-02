@@ -1,5 +1,5 @@
 <?php
-namespace Src\Help;
+namespace Dartswoole\Help;
 
 class ColorString
 {
