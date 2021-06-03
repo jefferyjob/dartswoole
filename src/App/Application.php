@@ -4,6 +4,8 @@ namespace Dartswoole\App;
 use Dartswoole\Container\Container;
 use Dartswoole\Help\ColorString;
 use Dartswoole\Help\Debug;
+use Dartswoole\Server\Http\HttpServer;
+use function Webmozart\Assert\Tests\StaticAnalysis\email;
 
 /**
  * 框架核心注册与启动
@@ -21,8 +23,12 @@ class Application extends Container {
     /**
      * 框架启动
      */
-    public function __construct()
+    public function __construct($path)
     {
+        if(!empty($path)) {
+            $this->setBasePath($path);
+        }
+
         // logo 展示
         echo ColorString::getColoredString(self::LOGO, 'green');
 
@@ -45,10 +51,8 @@ class Application extends Container {
         $cli = $argv[1] ?? null;
         switch (strtolower($cli)) {
             case 'http:start':
-                echo 1234;
-                break;
-            case '':
-                echo 345;
+                $server = new HttpServer($this);
+                $server->start();
                 break;
             default:
                 Debug::error("Service input error");

@@ -29,7 +29,8 @@ class Config {
     {
         // 判断文件夹是否存在
         if(!is_dir($dir)) {
-            throw new Exception("Not Found Dir Of Config Dic ({$dir})", 500);
+            return;
+            //throw new Exception("Not Found Dir Of Config Dic ({$dir})", 500);
         }
         // 读取文件夹下的文件
         $files = scandir($dir);
@@ -45,7 +46,6 @@ class Config {
             // 读取文件内容信息
             $data[$filename] = include $dir."/".$file;
         }
-
         return $data;
     }
 

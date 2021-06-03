@@ -8,9 +8,7 @@ class ServerPrivoder
 {
     public function bootstrap(Application $app)
     {
-        $priovders = $app->make('config')->get('app.priovders');
-
-        Debug::dd($priovders);
+        $priovders = $app->make('config')->get('dartswoole.priovders');
 
         // 先是 register
         foreach ($priovders as $key => $priovder) {
