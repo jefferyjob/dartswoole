@@ -3,7 +3,7 @@ namespace Dartswoole\Priovder;
 
 use Dartswoole\App\Application;
 
-abstract class ServerPriovder
+abstract class PriovderInterface
 {
     /**
      * @var Application

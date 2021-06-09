@@ -2,9 +2,9 @@
 namespace Dartswoole\Route;
 
 use Dartswoole\Help\Debug;
-use Dartswoole\Priovder\ServerPriovder;
+use Dartswoole\Priovder\PriovderInterface;
 
-class RouteServerPriovder extends ServerPriovder
+class RoutePriovder extends PriovderInterface
 {
     public function boot()
     {

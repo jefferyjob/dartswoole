@@ -4,6 +4,9 @@ namespace Dartswoole\App\Bootstrap;
 use Dartswoole\App\Application;
 use Dartswoole\Help\Debug;
 
+/**
+ * 服务提供者
+ */
 class ServerPrivoder
 {
     public function bootstrap(Application $app)

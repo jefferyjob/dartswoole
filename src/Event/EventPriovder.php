@@ -2,9 +2,9 @@
 namespace Dartswoole\Event;
 
 use Dartswoole\Help\Debug;
-use Dartswoole\Priovder\ServerPriovder;
+use Dartswoole\Priovder\PriovderInterface;
 
-class EventServerPriovder extends ServerPriovder
+class EventPriovder extends PriovderInterface
 {
     public function boot()
     {
