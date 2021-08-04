@@ -5,11 +5,20 @@ use \Exception;
 
 class Container {
 
-    // 框架服务单例
+    /**
+     * @var object 框架服务单例
+     */
     protected static $instance;
 
-    protected $bindings = []; // 容器服务绑定
-    protected $instances = []; // 容器内其他服务单例
+    /**
+     * @var array 容器服务绑定
+     */
+    protected $bindings = [];
+
+    /**
+     * @var array 容器内其他服务单例
+     */
+    protected $instances = [];
 
     /**
      * 容器绑定

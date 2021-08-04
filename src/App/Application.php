@@ -4,20 +4,25 @@ namespace Dartswoole\App;
 use Dartswoole\Container\Container;
 use Dartswoole\Help\ColorString;
 use Dartswoole\Help\Debug;
-use Dartswoole\Server\Http\HttpServer;
-use function Webmozart\Assert\Tests\StaticAnalysis\email;
 
 /**
  * 框架核心注册与启动
- *
  */
 class Application extends Container {
 
+    /**
+     * @var string 定义Library类库根目录地址
+     */
     protected $basePath;
 
+    /**
+     * Library类库驱动服务
+     *
+     * @var string[]
+     */
     protected $bootstraps = array(
-        Bootstrap\LoadConfiguration::class,
-        Bootstrap\ServerPrivoder::class
+        Bootstrap\LoadConfig::class, // 加载配置文件
+        Bootstrap\ServerPrivoder::class // 服务提供者
     );
 
     /**
@@ -25,37 +30,40 @@ class Application extends Container {
      */
     public function __construct($path)
     {
+        // 定义根目录
         if(!empty($path)) {
             $this->setBasePath($path);
         }
 
         // logo 展示
-        echo ColorString::getColoredString(self::LOGO, 'green');
+        Debug::info("========================\n====== DartSwoole ======\n========================");
 
-        // 将该类创建单例
+        // 将当前类创建单例
         self::setInstance($this);
-
         // 加载框架驱动
         $this->bootstrap();
 
-        // 启动成功
-        echo ColorString::getColoredString("Dartswoole 项目启动成功", 'green');
+        // 启动成功的文本输出
+        echo ColorString::getColoredString("Dartswoole Library 启动成功", 'yellow').PHP_EOL.PHP_EOL;
     }
 
     /**
      * 服务器启动处理php-cli命令
      *
-     * @param $argv
+     * @param $argv string php-cli传递的参数
      */
     public function run($argv){
         $cli = $argv[1] ?? null;
         switch (strtolower($cli)) {
+            // http 服务
             case 'http:start':
-                $server = new HttpServer($this);
+                $server = new \Dartswoole\SwooleServer\Http\HttpServer($this);
                 $server->start();
                 break;
+
+            // 错误的服务名称
             default:
-                Debug::error("Service input error");
+                Debug::error("Command input error");
         }
     }
 
@@ -81,18 +89,4 @@ class Application extends Container {
     {
         return $this->basePath;
     }
-
-    const LOGO = "
- .----------------.  .----------------.  .----------------.  .----------------.  .----------------.   
-| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |  
-| |  ________    | || |      __      | || |  _______     | || |  _________   | || |    _______   | |  
-| | |_   ___ `.  | || |     /  \     | || | |_   __ \    | || | |  _   _  |  | || |   /  ___  |  | |  
-| |   | |   `. \ | || |    / /\ \    | || |   | |__) |   | || | |_/ | | \_|  | || |  |  (__ \_|  | |  
-| |   | |    | | | || |   / ____ \   | || |   |  __ /    | || |     | |      | || |   '.___`-.   | |  
-| |  _| |___.' / | || | _/ /    \ \_ | || |  _| |  \ \_  | || |    _| |_     | || |  |`\____) |  | |  
-| | |________.'  | || ||____|  |____|| || | |____| |___| | || |   |_____|    | || |  |_______.'  | |  
-| |              | || |              | || |              | || |              | || |              | |  
-| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |  
- '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  
-    ";
 }

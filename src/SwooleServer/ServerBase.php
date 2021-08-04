@@ -1,5 +1,5 @@
 <?php
-namespace Dartswoole\Server;
+namespace Dartswoole\SwooleServer;
 
 use Dartswoole\App\Application;
 

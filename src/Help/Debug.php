@@ -26,13 +26,13 @@ class Debug {
      * @param $string
      */
     public static function info($string) {
-        echo PHP_EOL.ColorString::getColoredString($string, 'green').PHP_EOL;
+        echo ColorString::getColoredString($string, 'green').PHP_EOL;
     }
     public static function warn($string) {
-        echo PHP_EOL.ColorString::getColoredString($string, 'black', 'yellow').PHP_EOL;
+        echo ColorString::getColoredString($string, 'black', 'yellow').PHP_EOL;
     }
     public static function error($string) {
-        echo PHP_EOL.ColorString::getColoredString($string, 'white', 'red').PHP_EOL;
+        echo ColorString::getColoredString($string, 'white', 'red').PHP_EOL;
         die;
     }
 

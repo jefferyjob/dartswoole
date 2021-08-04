@@ -1,8 +1,8 @@
 <?php
-namespace Dartswoole\Server\Http;
+namespace Dartswoole\SwooleServer\Http;
 
 use Dartswoole\Help\Debug;
-use Dartswoole\Server\ServerBase;
+use Dartswoole\SwooleServer\ServerBase;
 use Swoole\Http\Server;
 
 /**
@@ -15,18 +15,29 @@ use Swoole\Http\Server;
 
 class HttpServer extends ServerBase {
 
+    /**
+     * 配置文件
+     */
     public function initServerConfig()
     {
 
     }
 
+    /**
+     * 创建服务
+     */
     public function createServer()
     {
         $this->server = new Server($this->host, $this->port);
 
+        Debug::info("swoole http 服务启动成功：");
+
         Debug::info("http://{$this->host}:{$this->port}");
     }
 
+    /**
+     * 事件绑定
+     */
     public function initEvent()
     {
         $this->setEvent('sub', [
@@ -34,10 +45,17 @@ class HttpServer extends ServerBase {
         ]);
     }
 
+    /**
+     * http 响应事件
+     *
+     * @param $request
+     * @param $response
+     */
     public function onRequest($request, $response)
     {
-        Debug::info("成功了");
-        //$response->end("<h1>Hello Swoole. #".rand(1000, 9999)."</h1>");
+        Debug::info("swoole http 访问成功了 #".rand(10000, 99999));
+
+        $response->end("<h1>Hello Swoole. #".rand(1000, 9999)."</h1>");
     }
 
 }

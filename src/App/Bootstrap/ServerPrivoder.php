@@ -11,13 +11,14 @@ class ServerPrivoder
 {
     public function bootstrap(Application $app)
     {
+        // 获取 darts 框架中 dartswoole.php 中的 priovders 配置信息
         $priovders = $app->make('config')->get('dartswoole.priovders');
 
-        // 先是 register
+        // 服务注册 register
         foreach ($priovders as $key => $priovder) {
             (new $priovder($app))->register();
         }
-        // 先是 boot
+        // 服务启动 boot
         foreach ($priovders as $key => $priovder) {
             (new $priovder($app))->boot();
         }

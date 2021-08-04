@@ -4,6 +4,7 @@ namespace Dartswoole\Config;
 use \Exception;
 
 /**
+ * 用于获取配置文件的处理类
  * 框架的配置文件处理，并进行加载
  */
 class Config {
