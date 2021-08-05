@@ -125,6 +125,14 @@ abstract class ServerBase {
     }
 
     /**
+     * 获取 swoole server 服务对象
+     */
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
      * swoole服务启动
      */
     public function start() {
