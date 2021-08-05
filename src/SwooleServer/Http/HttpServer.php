@@ -20,7 +20,9 @@ class HttpServer extends ServerBase {
      */
     public function initServerConfig()
     {
+        $this->host = $this->app->make('config')->get('server.http.host');
 
+        $this->port = $this->app->make('config')->get('server.http.port');
     }
 
     /**
