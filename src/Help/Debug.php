@@ -9,7 +9,7 @@ class Debug {
      * @return mixed
      */
     static public function dd($param = null) {
-        self::info("=====================================================");
+        self::info(PHP_EOL."===Debug-start===================");
         if(is_array($param)) {
             print_r($param);
         } else if(is_string($param)) {
@@ -17,7 +17,7 @@ class Debug {
         } else {
             var_dump($param);
         }
-        self::info("=====================================================");
+        self::info(PHP_EOL."===Debug-end=====================");
     }
 
     /**

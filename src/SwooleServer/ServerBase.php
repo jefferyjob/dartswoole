@@ -42,7 +42,8 @@ abstract class ServerBase {
      */
     protected $serverEvent = [
         "server" => [ // 有swoole的本身的事件 -- 是在swoole的整体生命周期
-            'start' => 'onStart'
+            'start' => 'onStart',
+            'Shutdown' => 'onShutdown'
         ],
         "sub" => [], // http - websocket 是记录明确swoole服务独有的事件
         "ext" => [] // 根据用户扩展task事件
@@ -70,7 +71,31 @@ abstract class ServerBase {
     abstract public function initServerConfig();
     abstract public function createServer();
     abstract public function initEvent();
-    public function onStart($server) {}
+
+    /**
+     * 启动
+     *
+     * @param $server
+     * @throws \Exception
+     */
+    public function onStart($server) {
+        $this->app->make('event')->trigger('swoole:start', [$this, $server]);
+    }
+
+    /**
+     * 停止
+     *
+     * @param $server
+     * @throws \Exception
+     *
+     * 测试用 kill -15 ，不能用 -9
+     *
+     * mark:
+     * https://wiki.swoole.com/#/server/events?id=onshutdown
+     */
+    public function onShutdown($server) {
+        $this->app->make('event')->trigger('swoole:stop', [$this, $server]);
+    }
 
     /**
      * 初始化中设置swoole回调事件

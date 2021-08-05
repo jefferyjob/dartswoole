@@ -20,7 +20,7 @@ class RouteServerPriovder extends PriovderInterface
         $this->app->bind('route', Route::getInstance()->registerRoute($this->map));
 
         // test：获取所有路由信息
-        Debug::dd($this->app->make("route")->getRoutes());
+        //Debug::dd($this->app->make("route")->getRoutes());
     }
 
 }

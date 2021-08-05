@@ -1,6 +1,8 @@
 <?php
 namespace Dartswoole\Routes;
 
+use Dartswoole\Help\Debug;
+
 /**
  * 路由解析实现类
  *
@@ -128,7 +130,7 @@ class Route {
             // 执行方法操作
             return $this->runAction($action);
         }
-        dd($action, "没有查找到方法");
+        Debug::dd($action . "# 没有查找到方法");
         return "404";
     }
 
