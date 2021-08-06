@@ -14,7 +14,8 @@
             "Dartswoole\\": "src"
         },
         "files": [
-            "src/Help/Debug.php"
+            "src/Help/Debug.php",
+            "src/Help/Function.php"
         ]
     },
     "autoload-dev": {

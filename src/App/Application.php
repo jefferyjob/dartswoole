@@ -4,6 +4,7 @@ namespace Dartswoole\App;
 use Dartswoole\Container\Container;
 use Dartswoole\Help\ColorString;
 use Dartswoole\Help\Debug;
+use Dartswoole\Rpc\RpcServer;
 
 /**
  * 框架核心注册与启动
@@ -58,13 +59,21 @@ class Application extends Container {
             // http 服务
             case 'http:start':
                 $server = new \Dartswoole\SwooleServer\Http\HttpServer($this);
-                $server->start();
                 break;
 
             // 错误的服务名称
             default:
                 Debug::error("Command input error");
         }
+
+        // 判断是否启动 RPC
+        if($this->make('config')->get('server.rpc.flag'))
+        {
+            new RpcServer($this, $server);
+        }
+
+        // 服务启动
+        $server->start();
     }
 
     /**
