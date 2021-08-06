@@ -1,6 +1,7 @@
 <?php
 namespace Dartswoole\Config;
 
+use Dartswoole\Help\Debug;
 use \Exception;
 
 /**
@@ -60,6 +61,9 @@ class Config {
     {
         $data = $this->itmes;
         foreach (explode('.', $keys) as $key => $value) {
+            if(!isset($data[$value])) {
+                Debug::error($keys." Not Found");
+            }
             $data = $data[$value];
         }
         return $data;

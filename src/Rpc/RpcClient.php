@@ -1,6 +1,11 @@
 <?php
 namespace Dartswoole\Rpc;
-
+/**
+ * RPC 客户端服务相关处理
+ *
+ * Class RpcClient
+ * @package Dartswoole\Rpc
+ */
 class RpcClient
 {
     /**
@@ -26,10 +31,10 @@ class RpcClient
             'params' => $params
         );
 
-        $config = app('config')->make('rpc.'.$this->service);
+        $config = app('config')->get('rpc_client.'.$this->service);
 
         // 请求发送，获取rpc的服务
-        $client = new Swoole\Client(SWOOLE_SOCK_TCP);
+        $client = new \Swoole\Client(SWOOLE_SOCK_TCP);
         if (!$client->connect($config['host'], $config['port'], 0.5)) {
             throw new \Exception("连接RPC服务端失败", 500);
 
@@ -41,6 +46,8 @@ class RpcClient
     }
 
     /**
+     * 调用不存在的方法
+     *
      * @param $name
      * @param $arguments
      */
@@ -50,6 +57,8 @@ class RpcClient
     }
 
     /**
+     * 调用不存在的静态方法
+     *
      * @param $name
      * @param $arguments
      */

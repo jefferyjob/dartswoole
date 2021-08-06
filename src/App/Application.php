@@ -67,7 +67,7 @@ class Application extends Container {
         }
 
         // 判断是否启动 RPC
-        if($this->make('config')->get('server.rpc.flag'))
+        if($this->make('config')->get('rpc_server.flag'))
         {
             new RpcServer($this, $server);
         }

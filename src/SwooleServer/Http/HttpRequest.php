@@ -3,6 +3,12 @@ namespace Dartswoole\SwooleServer\Http;
 
 use Swoole\Http\Request as SwooleRequest;
 
+/**
+ * 请求路由的解析
+ *
+ * Class HttpRequest
+ * @package Dartswoole\SwooleServer\Http
+ */
 class HttpRequest
 {
     protected $method; // 记录请求方式是get还是 post

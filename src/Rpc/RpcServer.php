@@ -6,6 +6,12 @@ use Dartswoole\Help\Debug;
 use Dartswoole\SwooleServer\Reponse;
 use Dartswoole\SwooleServer\ServerBase;
 
+/**
+ * RPC 服务端相关服务处理
+ *
+ * Class RpcServer
+ * @package Dartswoole\Rpc
+ */
 class RpcServer
 {
     /**
@@ -47,7 +53,7 @@ class RpcServer
         $this->config = $this->app->make('config');
 
         // swoole 多端口监听
-        $this->listen = $serverBase->getServer()->listen($this->config->get('server.rpc.host'),$this->config->get('server.rpc.port'),$this->config->get('server.rpc.type'));
+        $this->listen = $serverBase->getServer()->listen($this->config->get('rpc_server.host'),$this->config->get('rpc_server.port'),$this->config->get('rpc_server.type'));
 
         // 事件监听
         $this->listen->on('Connect', [$this, 'Connect']);
@@ -55,10 +61,10 @@ class RpcServer
         $this->listen->on('Close', [$this, 'Close']);
 
         // swoole 配置重置
-        $this->listen->set($this->config->get('server.rpc.swoole'));
+        $this->listen->set($this->config->get('rpc_server.swoole'));
 
         Debug::info('RPC 服务启动成功');
-        Debug::info('tcp://'.$this->config->get('server.rpc.host').':'.$this->config->get('server.rpc.port'));
+        Debug::info('tcp://'.$this->config->get('rpc_server.host').':'.$this->config->get('rpc_server.port'));
     }
 
     /**

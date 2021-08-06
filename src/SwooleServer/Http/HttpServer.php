@@ -20,9 +20,9 @@ class HttpServer extends ServerBase {
      */
     public function initServerConfig()
     {
-        $this->host = $this->app->make('config')->get('server.http.host');
+        $this->host = $this->app->make('config')->get('http_server.host');
 
-        $this->port = $this->app->make('config')->get('server.http.port');
+        $this->port = $this->app->make('config')->get('http_server.port');
     }
 
     /**
@@ -72,7 +72,8 @@ class HttpServer extends ServerBase {
         //$response->end("<h1>Hello Swoole. #".rand(1000, 9999)."</h1>");
         $httpRequest = HttpRequest::init($request);
 
-        $this->app->make('route')->match($httpRequest->getUriPath(),'http',$httpRequest->getMethod());
+        $return = $this->app->make('route')->match($httpRequest->getUriPath(),'http',$httpRequest->getMethod());
+        $response->end($return);
 
         Debug::dd('执行成功了666');
     }
