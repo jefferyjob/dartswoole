@@ -2,6 +2,7 @@
 namespace Dartswoole\SwooleServer\Http;
 
 use Dartswoole\Help\Debug;
+use Dartswoole\SwooleServer\Reponse;
 use Dartswoole\SwooleServer\ServerBase;
 use Swoole\Http\Server;
 

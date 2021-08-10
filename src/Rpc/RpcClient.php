@@ -1,5 +1,8 @@
 <?php
 namespace Dartswoole\Rpc;
+
+use Swoole\Coroutine\Http\Client;
+
 /**
  * RPC 客户端服务相关处理
  *
@@ -31,11 +34,29 @@ class RpcClient
             'params' => $params
         );
 
-        $config = app('config')->get('rpc_client.'.$this->service);
+        // 1、采用配置文件访问rpc服务
+        // 获取 frame 中的配置信息
+//        $config = app('config')->get('rpc_client.'.$this->service);
+//        return $this->send($config['host'], $config['port'], $data);
 
-        // 请求发送，获取rpc的服务
-        $client = new \Swoole\Client(SWOOLE_SOCK_TCP);
-        if (!$client->connect($config['host'], $config['port'], 0.5)) {
+        // 2、采用consul注册的服务访问rpc服务
+        $service = app('rpc-proxy')->getService($this->service);
+        return $this->send($service['host'], $service['port'], $data);
+    }
+
+    /**
+     * 请求 RPC 服务
+     *
+     * @param $host
+     * @param $port
+     * @param $data
+     * @return mixed
+     * @throws \Exception
+     */
+    public function send($host, $port, $data)
+    {
+        $client = new Client(SWOOLE_SOCK_TCP);
+        if (!$client->connect($host, $port, 0.5)) {
             throw new \Exception("连接RPC服务端失败", 500);
 
         }
