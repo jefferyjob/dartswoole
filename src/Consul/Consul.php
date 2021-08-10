@@ -52,6 +52,14 @@ class Consul
 
         $client->close();
 
+        if($statusCode != 200) {
+            throw new \Exception("Consul bind faild. ".json_encode(array(
+                    'host' => $this->host,
+                    'port' => $this->port,
+                    'statusCode' => $statusCode,
+            )), 500);
+        }
+
         return self::response($headers, $body, $statusCode);
     }
 

@@ -55,7 +55,7 @@ class RpcServer
         // swoole 多端口监听
         $this->listen = $serverBase->getServer()->listen($this->config->get('rpc_server.host'),$this->config->get('rpc_server.port'),$this->config->get('rpc_server.type'));
 
-        // 事件监听
+        // 事件监听绑定
         $this->listen->on('Connect', [$this, 'Connect']);
         $this->listen->on('Receive', [$this, 'Receive']);
         $this->listen->on('Close', [$this, 'Close']);
