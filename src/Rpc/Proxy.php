@@ -1,6 +1,8 @@
 <?php
 namespace Dartswoole\Rpc;
 
+use Dartswoole\Help\Debug;
+
 /**
  * RPC代理服务
  *
@@ -36,12 +38,13 @@ class Proxy
         }
 
         if (empty($this->services)) {
-            return app('config')->get('rpc_client.'.$consul_name);
+            throw new  \Exception("RPC services function not found", 500);
+            // return app('config')->get('rpc_client.'.$consul_name);
         }
     }
 
     /**
-     * 获取具体要请求的服务
+     * 获取具体要请求的 rpc 服务
      *
      * @param string $consul_name
      * @return mixed|string
@@ -49,6 +52,9 @@ class Proxy
     public function getService($consul_name = '')
     {
         $services = $this->services($consul_name);
+        if(empty($services)){
+            throw new  \Exception("RPC Service Not Found", 500);
+        }
         return $services[array_rand($services, 1)];
     }
 }

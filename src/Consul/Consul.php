@@ -41,7 +41,7 @@ class Consul
         $client->set(['timeout' => 1]);
         $client->setMethod($method);
         if($options) {
-            $client->setData(json_encode($options));
+            $client->setData(json_encode($options['body']));
         }
         $client->execute($uri);
 

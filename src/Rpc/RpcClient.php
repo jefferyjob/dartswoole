@@ -1,7 +1,10 @@
 <?php
 namespace Dartswoole\Rpc;
 
-use Swoole\Coroutine\Http\Client;
+use Dartswoole\Help\Debug;
+//use Swoole\Coroutine\Http\Client;
+use Swoole\Coroutine\Client;
+use function Couchbase\defaultDecoder;
 
 /**
  * RPC 客户端服务相关处理
@@ -42,6 +45,8 @@ class RpcClient
         // 2、采用consul注册的服务访问rpc服务
         $service = app('rpc-proxy')->getService($this->service);
         return $this->send($service['host'], $service['port'], $data);
+
+        //return $this->send('127.0.0.1', 9600, $data);
     }
 
     /**
@@ -57,7 +62,10 @@ class RpcClient
     {
         $client = new Client(SWOOLE_SOCK_TCP);
         if (!$client->connect($host, $port, 0.5)) {
-            throw new \Exception("连接RPC服务端失败", 500);
+            throw new \Exception("连接RPC服务端失败".json_encode(array(
+                'host' => $host,
+                'port' => $port
+            )), 500);
 
         }
         $client->send(json_encode($data));

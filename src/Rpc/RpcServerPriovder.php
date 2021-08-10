@@ -1,6 +1,7 @@
 <?php
 namespace Dartswoole\Rpc;
 
+use Dartswoole\Help\Debug;
 use Dartswoole\Priovder\PriovderInterface;
 
 class RpcServerPriovder extends PriovderInterface
@@ -14,8 +15,5 @@ class RpcServerPriovder extends PriovderInterface
         $this->app->bind('rpc-proxy', new Proxy($this->services));
     }
 
-    protected function provider()
-    {
-
-    }
+    protected function provider() {}
 }
