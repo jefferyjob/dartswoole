@@ -24,11 +24,11 @@ class DB
     /**
      * raw调用数据库
      *
-     * @param $method
-     * @param $args
+     * @param $method string 请求方法
+     * @param $args mixed 请求参数
      * @return mixed
      */
-    static public function raw($method, $args)
+    static public function __callStatic($method, $args)
     {
         // 一键协程化
         Runtime::enableCoroutine();
