@@ -2,7 +2,6 @@
 namespace Dartswoole\Rpc;
 
 use Dartswoole\Help\Debug;
-//use Swoole\Coroutine\Http\Client;
 use Swoole\Coroutine\Client;
 use function Couchbase\defaultDecoder;
 
