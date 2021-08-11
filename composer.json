@@ -30,6 +30,9 @@
             "url": "https://mirrors.aliyun.com/composer/"
         }
     },
+    "require": {
+        "php": ">=7.0"
+    },
     "require-dev": {
     }
 }
