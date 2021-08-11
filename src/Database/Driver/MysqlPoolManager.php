@@ -1,17 +1,19 @@
 <?php
-namespace Dartswoole\Database;
+namespace Dartswoole\Database\Driver;
 
 use Dartswoole\App\Application;
 use Swoole\Database\PDOConfig;
 use Swoole\Database\PDOPool;
 
 /**
- * mysql连接池连接
+ * mysql连接池的创建与管理
  *
- * Class MysqlPool
- * @package Dartswoole\Database
+ * --------------------------------------------------------------------------
+ * 采用swoole创建mysql的连接池
+ * 对于连接池进行日常的管理和维护
+ * --------------------------------------------------------------------------
  */
-class MysqlPool
+class MysqlPoolManager
 {
     /**
      * @var object application
@@ -36,25 +38,29 @@ class MysqlPool
     }
 
     /**
-     * 初始化数据库连接
+     * 初始化数据库连接池
      *
-     * wiki：https://wiki.swoole.com/#/coroutine/conn_pool
+     * 连接池wiki：https://wiki.swoole.com/#/coroutine/conn_pool
      */
     private function init()
     {
+        // 连接配置
         $config = (new PDOConfig)
             ->withHost($this->config->get("database.mysql.host"))
             ->withPort($this->config->get("database.mysql.port"))
             ->withDbName($this->config->get("database.mysql.database"))
             ->withUsername($this->config->get("database.mysql.username"))
             ->withPassword($this->config->get("database.mysql.password"));
+
+        // 连接池创建
         $this->pool = new PDOPool($config, $this->config->get("database.mysql.pool.size"));
     }
 
     /**
-     * 获取连接（连接池未满时会创建新的连接）
+     * 获取连接
      *
      * @return mixed
+     * 连接池未满时会创建新的连接
      */
     public function get() {
         return $this->pool->get();

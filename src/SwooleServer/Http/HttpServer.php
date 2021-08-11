@@ -59,8 +59,6 @@ class HttpServer extends ServerBase {
      */
     public function onRequest($request, $response)
     {
-        Debug::info("swoole http 访问成功了 #".rand(10000, 99999));
-
         // 处理第一次请求
         if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico') {
             $response->end();
@@ -75,8 +73,6 @@ class HttpServer extends ServerBase {
 
         $return = $this->app->make('route')->match($httpRequest->getUriPath(),'http',$httpRequest->getMethod());
         $response->end($return);
-
-        Debug::dd('执行成功了666');
     }
 
 }
