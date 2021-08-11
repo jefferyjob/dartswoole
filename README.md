@@ -15,6 +15,7 @@ https://github.com/jefferyjob/darts
 - Swoole的http服务的实现
 - 基于consule实现独立的RPC服务
 - 基于Swoole实现RPC客户端和服务端
+- 数据库的Pool连接池的操作支持
 
 ## 目录简介
 
